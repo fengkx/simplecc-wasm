@@ -1,6 +1,6 @@
 {
   "name": "simplecc-wasm",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Simple OpenCC alternative with wasm",
   "main": "pkg/nodejs/simplecc_wasm.js",
   "browser": "pkg/web/simplecc_wasm.js",
@@ -11,7 +11,7 @@
     "build:nodejs": "wasm-bindgen target/wasm32-unknown-unknown/release/simplecc_wasm.wasm --out-dir ./pkg/nodejs --target nodejs",
     "build:web": "wasm-bindgen target/wasm32-unknown-unknown/release/simplecc_wasm.wasm --out-dir ./pkg/web --target web",
     "build:opt": "wasm-opt -O3 -o pkg/web/simplecc_wasm_bg.wasm pkg/web/simplecc_wasm_bg.wasm && wasm-opt -O3 -o pkg/nodejs/simplecc_wasm_bg.wasm pkg/nodejs/simplecc_wasm_bg.wasm",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest --run"
   },
   "files": [
     "pkg/**/*"
@@ -30,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/fengkx/simplecc-wasm/issues"
   },
-  "homepage": "https://github.com/fengkx/simplecc-wasm#readme"
+  "homepage": "https://github.com/fengkx/simplecc-wasm#readme",
+  "devDependencies": {
+    "vitest": "^0.26.3"
+  }
 }
