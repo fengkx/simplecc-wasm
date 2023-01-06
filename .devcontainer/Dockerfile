@@ -2,7 +2,6 @@ FROM mcr.microsoft.com/devcontainers/javascript-node:18-bullseye
 SHELL ["/bin/bash", "-c"]
 USER node
 RUN sudo apt -y update && sudo apt install -y binaryen curl
-# RUN npm install
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 RUN echo "$HOME"
 RUN tail -n 5 "$HOME/.bashrc"

@@ -6,7 +6,7 @@
   "browser": "pkg/web/simplecc_wasm.js",
   "scripts": {
     "build": "npm run build:cargo && npm run build:nodejs && npm run build:web && npm run build:opt",
-    "prepublish": "npm run build",
+    "prepublish": "npm run build && npm run test",
     "build:cargo": "cargo build --release --target wasm32-unknown-unknown",
     "build:nodejs": "wasm-bindgen target/wasm32-unknown-unknown/release/simplecc_wasm.wasm --out-dir ./pkg/nodejs --target nodejs",
     "build:web": "wasm-bindgen target/wasm32-unknown-unknown/release/simplecc_wasm.wasm --out-dir ./pkg/web --target web",
