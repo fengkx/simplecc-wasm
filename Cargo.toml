@@ -12,6 +12,11 @@ repository = "https://github.com/fengkx/simplecc-wasm"
 [lib]
 crate-type = ["cdylib"]
 
+[profile.release]
+lto = true
+strip="debuginfo"
+
+
 include = [
     "**/*.rs",
     "Cargo.toml",
