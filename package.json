@@ -3,9 +3,44 @@
   "version": "0.1.5",
   "description": "Simple OpenCC alternative with wasm",
   "main": "pkg/nodejs/simplecc_wasm.js",
-  "browser": "pkg/web/simplecc_wasm.js",
+  "exports": {
+    ".": {
+      "node": {
+        "types": "./pkg/nodejs/simplecc_wasm.d.ts",
+        "default": "./pkg/nodejs/simplecc_wasm.js"
+      },
+      "deno": {
+        "types": "./pkg/deno/simplecc_wasm.d.ts",
+        "default": "./pkg/deno/simplecc_wasm.js"
+      },
+      "browser": {
+        "types": "./pkg/web/simplecc_wasm.d.ts",
+        "default": "./pkg/web/simplecc_wasm.js"
+      },
+      "import": {
+        "types": "./pkg/web/simplecc_wasm.d.ts",
+        "default": "./pkg/web/simplecc_wasm.js"
+      },
+      "require": {
+        "types": "./pkg/nodejs/simplecc_wasm.d.ts",
+        "default": "./pkg/nodejs/simplecc_wasm.js"
+      }
+    },
+    "./web": {
+      "types": "./pkg/web/simplecc_wasm.d.ts",
+      "default": "./pkg/web/simplecc_wasm.js"
+    },
+    "./node": {
+      "types": "./pkg/nodejs/simplecc_wasm.d.ts",
+      "default": "./pkg/nodejs/simplecc_wasm.js"
+    },
+    "./deno": {
+      "types": "./pkg/deno/simplecc_wasm.d.ts",
+      "default": "./pkg/deno/simplecc_wasm.js"
+    }
+  },
   "scripts": {
-    "build": "npm run build:cargo && npm run build:nodejs && npm run build:web && npm run build:opt",
+    "build": "make",
     "prepublish": "npm run build && npm run test",
     "build:cargo": "cargo build --release --target wasm32-unknown-unknown",
     "build:nodejs": "wasm-bindgen target/wasm32-unknown-unknown/release/simplecc_wasm.wasm --out-dir ./pkg/nodejs --target nodejs",
