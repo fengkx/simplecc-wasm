@@ -1,0 +1,41 @@
+name: Publish Any Commit
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - run: corepack enable
+      - uses: actions/setup-node@v4
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - name: Install
+        run: |
+          cargo install -f wasm-bindgen-cli wasm-opt
+          rustup target add wasm32-unknown-unknown
+          npm i
+      - name: Build wasm
+        run: make
+      - name: Test Node.js
+        run: |
+          npm test
+      - name: Build web
+        run: |
+          cd ${GITHUB_WORKSPACE}/demo/web
+          npm install
+          PUBLIC_URL='/simplecc-wasm/' npm run build
+      - name: Publish to pkg.pr.new
+        run: |
+          cd ${GITHUB_WORKSPACE}
+          npx pkg-pr-new publish
