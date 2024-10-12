@@ -14,7 +14,7 @@ crate-type = ["cdylib"]
 
 [profile.release]
 lto = true
-strip="debuginfo"
+strip = "debuginfo"
 
 
 include = [
@@ -26,5 +26,4 @@ include = [
 
 [dependencies]
 wasm-bindgen = "0.2"
-lazy_static = "1.4.0"
-simplecc = {version = "0.2.2", features = ["builtin_dicts"] }
+simplecc = { version = "0.2.2", features = ["builtin_dicts"] }
