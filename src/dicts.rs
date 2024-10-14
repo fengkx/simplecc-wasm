@@ -1,8 +1,8 @@
 //! A set of built-in OpenCC dictionaries.
 //!
 //! Turn on `builtin_dicts` feature to enable them.
-use lazy_static::lazy_static;
 use simplecc::Dict;
+use std::sync::LazyLock;
 
 macro_rules! builtin_dicts {
     ( $x:expr ) => {
@@ -27,41 +27,30 @@ macro_rules! builtin_dicts {
     };
 }
 
-lazy_static! {
-    /// Simplified Chinese to Traditional Chinese
-    pub static ref S2T: Dict = {
-        builtin_dicts!("STCharacters", "STPhrases")
-    };
+/// Simplified Chinese to Traditional Chinese
+pub static S2T: LazyLock<Dict> = LazyLock::new(|| builtin_dicts!("STCharacters", "STPhrases"));
 
-    /// Traditional Chinese to Simplified Chinese
-    pub static ref T2S: Dict = {
-        builtin_dicts!("TSCharacters", "TSPhrases")
-    };
+/// Traditional Chinese to Simplified Chinese
+pub static T2S: LazyLock<Dict> = LazyLock::new(|| builtin_dicts!("TSCharacters", "TSPhrases"));
 
-    /// Simplified Chinese to Traditional Chinese (Taiwan Standard)
-    pub static ref S2TW: Dict = {
-        S2T.clone().chain(builtin_dicts!("TWVariants"))
-    };
+/// Simplified Chinese to Traditional Chinese (Taiwan Standard)
+pub static S2TW: LazyLock<Dict> = LazyLock::new(|| S2T.clone().chain(builtin_dicts!("TWVariants")));
 
-    /// Simplified Chinese to Traditional Chinese (Hong Kong Standard)
-    pub static ref S2HK: Dict = {
-        S2T.clone().chain(builtin_dicts!("HKVariants"))
-    };
+/// Simplified Chinese to Traditional Chinese (Hong Kong Standard)
+pub static S2HK: LazyLock<Dict> = LazyLock::new(|| S2T.clone().chain(builtin_dicts!("HKVariants")));
 
-    /// Simplified Chinese to Traditional Chinese (Taiwan Standard) with
-    /// Taiwanese idiom
-    pub static ref S2TWP: Dict = {
-        S2T.clone().chain(builtin_dicts!("TWVariants",
-            "TWPhrasesIT", "TWPhrasesName", "TWPhrasesOther"))
-    };
+/// Simplified Chinese to Traditional Chinese (Taiwan Standard) with
+pub static S2TWP: LazyLock<Dict> = LazyLock::new(|| {
+    S2T.clone().chain(builtin_dicts!(
+        "TWVariants",
+        "TWPhrasesIT",
+        "TWPhrasesName",
+        "TWPhrasesOther"
+    ))
+});
 
-    pub static ref HK2S: Dict = {
-        T2S.clone().chain(builtin_dicts!("HKVariantsRevPhrases"))
-    };
-
-
-
-}
+pub static HK2S: LazyLock<Dict> =
+    LazyLock::new(|| T2S.clone().chain(builtin_dicts!("HKVariantsRevPhrases")));
 
 #[cfg(test)]
 mod tests {
