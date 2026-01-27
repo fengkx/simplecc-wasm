@@ -1,3 +1,6 @@
+# v1.1.1
+- Sync dict update from upstream OpenCC
+
 # v1.1.0
 - Sync dict update from upstream OpenCC
 - use std one cell instead of lazy_static [(#1)](https://github.com/fengkx/simplecc-wasm/pull/1)
