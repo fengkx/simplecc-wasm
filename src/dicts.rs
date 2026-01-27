@@ -43,9 +43,7 @@ pub static S2HK: LazyLock<Dict> = LazyLock::new(|| S2T.clone().chain(builtin_dic
 pub static S2TWP: LazyLock<Dict> = LazyLock::new(|| {
     S2T.clone().chain(builtin_dicts!(
         "TWVariants",
-        "TWPhrasesIT",
-        "TWPhrasesName",
-        "TWPhrasesOther"
+        "TWPhrases"
     ))
 });
 
