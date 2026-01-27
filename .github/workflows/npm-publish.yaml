@@ -1,5 +1,6 @@
 name: Publish on NPM
 permissions:
+  contents: read
   id-token: write
 on:
   push:
@@ -39,4 +40,4 @@ jobs:
           cd ${GITHUB_WORKSPACE}
           npm publish --provenance --access public --tag rc
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ''
