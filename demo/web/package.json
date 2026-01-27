@@ -8,10 +8,10 @@
     "preview": "rsbuild preview"
   },
   "dependencies": {
-    "simplecc-wasm": "file:../..",
-    "@radix-ui/themes": "^3.1.1",
-    "react": "^19.0.0-rc-06d0b89e-20240801",
-    "react-dom": "^19.0.0-rc-06d0b89e-20240801"
+    "@radix-ui/themes": "^3.2.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "simplecc-wasm": "file:../.."
   },
   "devDependencies": {
     "@rsbuild/core": "1.0.1-beta.9",
