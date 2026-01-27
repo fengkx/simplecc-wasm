@@ -1,6 +1,6 @@
 {
   "name": "simplecc-wasm",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Simple OpenCC alternative with wasm",
   "main": "pkg/nodejs/simplecc_wasm.js",
   "exports": {
